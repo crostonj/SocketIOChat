@@ -1,0 +1,17 @@
+{
+    "name": "chatterserver",
+    "description": "",
+    "main": "app.js",
+    "authors": [
+        "Jeff <crostonj@gmail.com>"
+    ],
+    "license": "ISC",
+    "homepage": "https://github.com/crostonj/SocketIOChat",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
+}
