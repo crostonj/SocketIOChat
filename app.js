@@ -11,6 +11,16 @@ server.listen(port, function() {
 
 // Routing
 app.use(express.static(__dirname + '/public'));
+app.use('/bower_components', express.static(__dirname + '/bower_components'));
+
+
+app.set('views', './views');
+app.set('view engine', 'ejs');
+
+var indexRouter = require('./src/Routes/indexRoutes')();
+var loginRouter = require('./src/Routes/loginRoutes')();
+app.use('/', indexRouter);
+app.use('/', loginRouter);
 
 var numUsers = 0;
 
