@@ -1,165 +1,56 @@
-<!doctype html>
-<html lang="en">
+var express = require('express');
+var indexRouter = express.Router();
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+module.exports = router = function() {
+    var indexService = require('../Services/indexService')();
+    var indexController = require('../Controllers/indexController')(indexService);
+    indexRouter.use(indexController.middleware);
 
-    <title>Chatter</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css" />
-    <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
+    indexRouter.route('/')
+        .get(indexController.Get);
 
-    <link rel="stylesheet" href="style.css">
-    <link href="/css/animate.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
-
-
-    <script src="/bower_components/jquery/dist/jquery.js"></script>
-    <script src="/js/bootstrap.js"></script>
+    return indexRouter;
+};
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
 </head>
 
-<body>
-    <div class="wrapper">
-        <div id="page-wrapper" class="gray-bg">
-            <div class="col-lg-12">
+<body class="gray-bg">
 
-                <div class="ibox chat-view">
+    <div class="middle-box text-center loginscreen animated fadeInDown">
+        <div>
+            <div>
 
-                    <div class="ibox-title">
-                        <small class="pull-right text-muted">Last message:  Mon Jan 26 2015 - 18:39:23</small> Chat room panel
-                    </div>
+                <h1 class="logo-name">Chatter</h1>
 
-                    <div class="ibox-content">
-                        <div class="row">
-                            <div class="col-md-9 ">
-                                <div class="chat-discussion">
-                                    <div class="chat-message left">
-                                        <div class="message">
-                                            <a class="message-author" href="#"> Michael Smith </a>
-                                            <span class="message-date"> Mon Jan 26 2015 - 18:39:23 </span>
-                                            <span class="message-content">
-											Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="chat-message right">
-                                        <div class="message">
-                                            <a class="message-author" href="#"> Karl Jordan </a>
-                                            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                            <span class="message-content">
-											Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover.
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <ul class="pages">
-                                    <li class="chat page">
-                                        <div class="chatArea">
-                                            <ul class="messages"></ul>
-                                        </div>
-                                        <input class="inputMessage" placeholder="Type here..." />
-                                    </li>
-                                    <li class="login page">
-                                        <div class="form">
-                                            <h3 class="title">What's your nickname?</h3>
-                                            <input class="usernameInput" type="text" maxlength="14" />
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="chat-users">
-                                    <div class="users-list">
-                                        <div class="chat-user">
-                                            <div class="chat-user-name">
-                                                <a href="#">Karl Jordan</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <div class="chat-user-name">
-                                                <a href="#">Monica Smith</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <span class="pull-right label label-primary">Online</span>
-                                            <div class="chat-user-name">
-                                                <a href="#">Michael Smith</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <span class="pull-right label label-primary">Online</span>
-                                            <div class="chat-user-name">
-                                                <a href="#">Janet Smith</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <div class="chat-user-name">
-                                                <a href="#">Alice Smith</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <div class="chat-user-name">
-                                                <a href="#">Monica Cale</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <div class="chat-user-name">
-                                                <a href="#">Mark Jordan</a>
-                                            </div>
-                                        </div>
-                                        <div class="chat-user">
-                                            <span class="pull-right label label-primary">Online</span>
-                                            <div class="chat-user-name">
-                                                <a href="#">Janet Smith</a>
-                                            </div>
-                                        </div>
-
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="chat-message-form">
-
-                                <div class="form-group">
-
-                                    <textarea class="form-control message-input inputMessage" name="message" placeholder="Enter message text"></textarea>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
             </div>
+            <h3>Welcome to Chatter</h3>
+            <p>Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
+                <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
+            </p>
+            <p>Login in. To see it in action.</p>
+            <form class="m-t" role="form" action="/Auth/signIn" method="post">
+                <div class="form-group">
+                    <input type="Username" name="Username" class="form-control" placeholder="Username" required="">
+                </div>
+                <div class="form-group">
+                    <input type="password" name="Password" class="form-control" placeholder="Password" required="">
+                </div>
+                <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                <a href="#"><small>Forgot password?</small></a>
+                <p class="text-muted text-center"><small>Do not have an account?</small></p>
+                <a class="btn btn-sm btn-white btn-block" href="/Auth/Register">Create an account</a>
+            </form>
+            <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
         </div>
     </div>
 
+    <!-- Mainly scripts -->
     <script src="js/jquery-2.1.1.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="js/wow.min.js"></script>
 
-    <!-- Custom and plugin javascript -->
-    <script src="js/inspinia.js"></script>
-    <script src="js/plugins/pace/pace.min.js"></script>
-
-    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-
-    <script src="js/socket.io.js"></script>
-    <script src="js/main.js"></script>
 </body>
 
 </html>

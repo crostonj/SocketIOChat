@@ -3,7 +3,9 @@ var express = require('express');
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
+var bodyParser = require('body-parser');
 var port = process.env.PORT || 3000;
+app.use(bodyParser.urlencoded({ extended: true }));
 
 server.listen(port, function() {
     console.log('Server listening at port %d', port);
@@ -12,15 +14,19 @@ server.listen(port, function() {
 // Routing
 app.use(express.static(__dirname + '/public'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
+require('./src/config/passport')(app);
 
-
-app.set('views', './views');
+app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
 var indexRouter = require('./src/Routes/indexRoutes')();
-var loginRouter = require('./src/Routes/loginRoutes')();
+var authRouter = require('./src/Routes/authRoutes')();
 app.use('/', indexRouter);
-app.use('/', loginRouter);
+app.use('/Auth', authRouter);
+
+app.use('/chat', function(req, res) {
+    res.render('chat');
+});
 
 var numUsers = 0;
 
@@ -79,8 +85,3 @@ io.sockets.on('connection', function(socket) {
     });
 
 });
-
-//server.listen(8090);
-
-// app.listen(appPort);
-console.log("Server listening on port " + port);
