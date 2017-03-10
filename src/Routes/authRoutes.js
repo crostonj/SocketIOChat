@@ -25,7 +25,7 @@ var router = function() {
                         if (num === 0) {
                             collection.insert(user, function(err, results) {
                                 req.login(results.Username, function() {
-                                    res.redirect('/Auth/profile');
+                                    res.redirect('/Auth/signIn');
                                 });
                             });
                         } else {
