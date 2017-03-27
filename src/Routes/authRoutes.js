@@ -38,13 +38,30 @@ var router = function() {
             });
         });
 
-    authRouter.route('/signIn')
-        .post(passport.authenticate('local', {
-            failureRedirect: '/chat'
-        }), function(req, res) {
-            res.redirect('/chat');
+    // authRouter.route('/signIn')
+    //     .post(passport.authenticate('local', {
+    //             failureRedirect: '/'
+    //         }),
+    //         function(req, res) {
+    //             var userinfo = {
+    //                 username: req.body.Username
+    //             };
+    //             res.redirect('/chat', {
+    //                 userinfo: userinfo
+    //             });
 
-        });
+    //         });
+    authRouter.route('/signIn')
+        .post(
+            function(req, res) {
+                var userinfo = {
+                    username: req.body.Username
+                };
+                res.render('chat', {
+                    userinfo: userinfo
+                });
+
+            });
     // .get(function(req, res) {
     //     res.send('hmmm......');
     // });

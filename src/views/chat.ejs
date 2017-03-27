@@ -15,13 +15,15 @@
     <link href="/css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
 
-    <link rel="stylesheet" href="style.css">
-    <link href="/css/animate.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
 
+    <link href="/css/animate.css" rel="stylesheet">
 
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/js/bootstrap.js"></script>
+
+    <h2 style="display:none;" id="Username"><%=userinfo.username %></h2>
+
+
 
 </head>
 
@@ -39,7 +41,7 @@
                     <div class="ibox-content">
                         <div class="row">
                             <div class="col-md-9 ">
-                                <div class="chat-discussion">
+                                <div class="chat-discussion" id='chatdiscussion'>
                                     <div class="chat-message left">
                                         <div class="message">
                                             <a class="message-author" href="#"> Michael Smith </a>
@@ -58,21 +60,7 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
-                                <ul class="pages">
-                                    <li class="chat page">
-                                        <div class="chatArea">
-                                            <ul class="messages"></ul>
-                                        </div>
-                                        <input class="inputMessage" placeholder="Type here..." />
-                                    </li>
-                                    <li class="login page">
-                                        <div class="form">
-                                            <h3 class="title">What's your nickname?</h3>
-                                            <input class="usernameInput" type="text" maxlength="14" />
-                                        </div>
-                                    </li>
-                                </ul>
+                                </div>                                
                             </div>
                             <div class="col-md-3">
                                 <div class="chat-users">
@@ -158,8 +146,16 @@
 
     <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-    <script src="js/socket.io.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/js/socket.io.js"></script>
+    <script src="/js/chat.js"></script>
+
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        var username = $("#Username").html(); 
+        setUsername(username);
+    });
+</script>
 </body>
 
 </html>
