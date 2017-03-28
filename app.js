@@ -1,11 +1,23 @@
 // Setup basic express server
 var express = require('express');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
+
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var bodyParser = require('body-parser');
 var port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
+
+
+app.use(cookieParser());
+app.use(session({
+    secret: 'Croston',
+    resave: true,
+    saveUninitialized: true
+}));
+
 
 server.listen(port, function() {
     console.log('Server listening at port %d', port);
@@ -21,8 +33,10 @@ app.set('view engine', 'ejs');
 
 var indexRouter = require('./src/Routes/indexRoutes')();
 var authRouter = require('./src/Routes/authRoutes')();
+var chatRouter = require('./src/Routes/chatRoutes')();
 app.use('/', indexRouter);
 app.use('/Auth', authRouter);
+app.use('/chat', chatRouter);
 
 app.use('/chat', function(req, res) {
     res.render('chat');
@@ -37,8 +51,8 @@ io.sockets.on('connection', function(socket) {
     socket.on('new message', function(data) {
         // we tell the client to execute 'new message'
         socket.broadcast.emit('new message', {
-            username: socket.username,
-            message: data
+            username: data.username,
+            message: data.message
         });
     });
     // when the client emits 'add user', this listens and executes

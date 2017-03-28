@@ -2,7 +2,7 @@ $(function() {
     // Initialize variables
     var $window = $(window);
 
-
+    var username = $("#Username").html();
     var $inputMessage = $('.message-input');
     var $messages = $('#chatdiscussion'); // Messages area
     var userlist = $('users-list');
@@ -30,29 +30,23 @@ $(function() {
         //if (message && connected) {
         $inputMessage.val('');
         addChatMessage({
-            //username: username,
+            username: username,
             message: message
         });
         // tell server to execute 'new message' and send along one parameter
-        socket.emit('new message', message);
+        socket.emit('new message', {
+            username: username,
+            message: message
+        });
         //}
     }
 
 
-
     function addParticipantsMessage(data) {
-
-        /*
-         <div class="chat-user">
-            <div class="chat-user-name">
-                <a href="#">Monica Smith</a>
-            </div>
-        </div>
-        */
         var chatuserDiv = $('<div class="chat-user">');
         var chatusernameDiv = $('<div class="chat-user-name">');
         var user = $('<a href="#">' + data.username + ' </a>');
-        chatusernameDiv.append($('<a href="#">' + data.username + ' </a>'));
+        chatusernameDiv.append($('<a href="#">' + data.username + ' </a> '));
         chatuserDiv.append(chatusernameDiv);
         userlist.append(chatuserDiv);
     }
@@ -66,24 +60,11 @@ $(function() {
         //    options.fade = false;
         //$typingMessages.remove();
         //}
-        /*<div class="chat-message left">
-            <div class="message">
-                <a class="message-author" href="#"> Michael Smith </a>
-                <span class="message-date"> Mon Jan 26 2015 - 18:39:23 </span>
-                <span class="message-content">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
-                </span>
-            </div>
-        </div>*/
 
         // var $messageDiv = $('<div class="message">');
         var $messageAuthoutDiv = $('<span class="username"/>').text(data.message);
-        var $authorDiv = $('<a class="message-author" href="#"> Jeff Croston </a>');
-        // var $usernameDiv = $('<span class="username"/>')
-        //     .text(data.username)
-        //     .css('color', getUsernameColor(data.username));
-        // var $messageBodyDiv = $('<span class="messageBody">')
-        //     .text(data.message);
+        var $authorDiv = $('<a class="message-author" href="#"> ' + data.username + ' </a> ' + (new Date()).getTime());
+
 
         // var typingClass = data.typing ? 'typing' : '';
         // var $messageDiv = $('<li class="message"/>')

@@ -54,12 +54,8 @@ var router = function() {
     authRouter.route('/signIn')
         .post(
             function(req, res) {
-                var userinfo = {
-                    username: req.body.Username
-                };
-                res.render('chat', {
-                    userinfo: userinfo
-                });
+                req.session.user = req.body.Username;
+                res.redirect('/chat');
 
             });
     // .get(function(req, res) {
