@@ -38,26 +38,25 @@ var router = function() {
             });
         });
 
-    // authRouter.route('/signIn')
-    //     .post(passport.authenticate('local', {
-    //             failureRedirect: '/'
-    //         }),
-    //         function(req, res) {
-    //             var userinfo = {
-    //                 username: req.body.Username
-    //             };
-    //             res.redirect('/chat', {
-    //                 userinfo: userinfo
-    //             });
-
-    //         });
     authRouter.route('/signIn')
-        .post(
+        .post(passport.authenticate('local', {
+                failureRedirect: '/'
+            }),
             function(req, res) {
+                var userinfo = {
+                    username: req.body.Username
+                };
                 req.session.user = req.body.Username;
                 res.redirect('/chat');
 
             });
+    // authRouter.route('/signIn')
+    //     .post(
+    //         function(req, res) {
+    //             req.session.user = req.body.Username;
+    //             res.redirect('/chat');
+
+    //         });
     // .get(function(req, res) {
     //     res.send('hmmm......');
     // });

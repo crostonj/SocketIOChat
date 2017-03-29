@@ -4,9 +4,9 @@ module.exports = IndexController =
         return {
             middleware: middleware = function(req, res, next) {
                 //Secure all routes
-                // if (!req.user) {
-                //     res.redirect('/');
-                // }
+                if (!req.session.user) {
+                    res.redirect('/');
+                }
                 next();
             },
             Get: Get = function(req, res) {

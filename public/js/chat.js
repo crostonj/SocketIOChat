@@ -46,7 +46,7 @@ $(function() {
         var chatuserDiv = $('<div class="chat-user">');
         var chatusernameDiv = $('<div class="chat-user-name">');
         var user = $('<a href="#">' + data.username + ' </a>');
-        chatusernameDiv.append($('<a href="#">' + data.username + ' </a> '));
+        chatusernameDiv.append($('<a href="#">' + data.username + ' </a> ' ));
         chatuserDiv.append(chatusernameDiv);
         userlist.append(chatuserDiv);
     }

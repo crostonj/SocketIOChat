@@ -5,19 +5,19 @@ var passport = require('passport'),
 
 module.exports = function() {
     passport.use(new LocalStrategy({
-            usernameField: 'username',
-            passwordField: 'password'
+            usernameField: 'Username',
+            passwordField: 'Password'
         },
         function(username, password, done) {
             var url = 'mongodb://localhost:27017/Chatter';
             mongodb.connect(url, function(err, db) {
                 var collection = db.collection('users');
                 collection.findOne({
-                        username: username
+                        Username: username
                     },
                     function(err, results) {
-                        if (err === null) {
-                            if (results.password === password) {
+                        if (!err) {
+                            if (results.Password === password) {
                                 var user = results;
                                 done(null, user);
                             } else {
@@ -30,7 +30,5 @@ module.exports = function() {
                     }
                 );
             });
-
-
         }));
 };
